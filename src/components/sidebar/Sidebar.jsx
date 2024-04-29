@@ -1,5 +1,6 @@
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const Sidebar = () => {
     return (
@@ -14,6 +15,7 @@ const Sidebar = () => {
             <ul>
             <p className="title">MAIN</p>
             <li>
+                <DashboardIcon className="icon"/>
                 <span>Dashboard</span>
             </li>
             <p className="title">LIST</p>
