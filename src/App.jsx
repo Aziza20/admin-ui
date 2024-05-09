@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { useState } from "react";
 // import pages yang digunakan
 import Home from "./pages/home/Home";
@@ -49,3 +50,5 @@ function App() {
 }
 
 export default App;
+
+ 
