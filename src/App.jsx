@@ -1,21 +1,34 @@
 // eslint-disable-next-line no-unused-vars
-import { useState } from "react";
+import { Children, useState } from "react";
 // import pages yang digunakan
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Mylist from "./pages/categories/Mylist";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-
-import { BrowserRouter, Routes, Route } from "react-router-dom"; // import dari react-router-dom
+import { AuthContext } from "./context/AuthContext";
 import { productInputs, userInputs } from "./formsource"; // import dari formsource.jsx
 
 function App() {
    const { darkMode } = useContext(DarkModeContext);
+
+   const { currentUser } = useContext(AuthContext)
+
+   // eslint-disable-next-line no-unused-vars, react/prop-types
+   const RequireAuth = ({ children }) => {
+     return currentUser ? children : <Navigate to="/login" />;
+   };
+   
+   // eslint-disable-next-line no-unused-vars, react/prop-types
+   const NotRequireAuth = ({ children }) => {
+     return currentUser ? <Navigate to="/" /> : children;
+   };
+ 
   return (
     <div className={darkMode ? "app dark" : "app"}> 
       <BrowserRouter>
