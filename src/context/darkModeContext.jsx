@@ -7,6 +7,7 @@ const INITIAL_STATE = {
 
 export const DarkModeContext = createContext(INITIAL_STATE);
 
+// eslint-disable-next-line react/prop-types
 export const DarkModeContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(DarkModeReducer, INITIAL_STATE);
 
