@@ -13,6 +13,8 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import { productInputs, userInputs } from "./formsource"; // import dari formsource.jsx
+// eslint-disable-next-line no-unused-vars
+import { userColumns, productColumns } from "./datatablesource";
 
 function App() {
    const { darkMode } = useContext(DarkModeContext);

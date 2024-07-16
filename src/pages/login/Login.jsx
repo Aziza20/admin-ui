@@ -1,16 +1,17 @@
 import "./login.scss"; 
-import { useContext, useState } from "react";
+import { useContext,useState } from "react";
+//import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext"
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => { 
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navitage = useNavigate();
+  const navigate = useNavigate()
 
   const {dispatch} = useContext(AuthContext);
 
@@ -20,9 +21,10 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+        const user = userCredential.user; 
         dispatch({type:"LOGIN", payload:user});
-        navitage("/");
+        console.log(user);
+        navigate("/");
       })
       // eslint-disable-next-line no-unused-vars
       .catch((error) => {
@@ -32,18 +34,20 @@ const Login = () => {
 
   return (
     <div className="login">
-      <form onSubmit={handleLogin}>
+      <form data-testid="form" onSubmit={handleLogin}>
         <input
+          id="email"
           type="email"
           placeholder="email" 
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
+          id="password"
           type="password"
           placeholder="password" 
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit" data-testid="submit">Login</button>
         {error && <span>Wrong email or password!</span>}
       </form>
     </div>
