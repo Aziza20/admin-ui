@@ -1,8 +1,9 @@
+import Sidebar from "../../components/sidebar/Sidebar"; // panggil sidebar dari components
+import Navbar from "../../components/navbar/Navbar"; // panggil navbar dari components
+import Widget from "../../components/widget/Widget"; // panggil widget dari components
+import Chart from "../../components/chart/Chart"; // panggil chart dari components
 import "./home.scss";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import Widget from "../../components/widget/Widget";
-import Chart from "../../components/chart/Chart";
+
 
 
 const Home = () => {

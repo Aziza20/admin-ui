@@ -1,6 +1,6 @@
 // single untuk menampilkan satu data
 import "./single.scss";
-import Sidebar from "../../components/sidebar/Sidebar"; // panggil component sidebar 
+import Sidebar from "../../components/sidebar/Sidebar"; // panggil component sidebar
 import Navbar from "../../components/navbar/Navbar"; // panggil component navbar
 import Chart from "../../components/chart/Chart"; // import chart
 //import List from "../../components/datatable/Datatable"; // import list yang berisi datatable
@@ -12,36 +12,36 @@ import { db } from "../../firebase";
 
 
 // eslint-disable-next-line react/prop-types
-const Single = ({columns}) => {
+const Single = ({ columns }) => {
   const location = useLocation();
-  const id = location.pathname.split('/')[2];
-  const type = location.pathname.split('/')[1];
+  const id = location.pathname.split("/")[2];
+  const type = location.pathname.split("/")[1];
   const [data, setData] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {  
-      const docRef  = doc(db, type, id);
-      const docSnap  = await getDoc(docRef);      
+    const fetchData = async () => {
+      const docRef = doc(db, type, id);
+      const docSnap = await getDoc(docRef);
       const docSnapData = docSnap.data();
-      
-      if (docSnap.exists()) { 
+
+      if (docSnap.exists()) {
         switch (type) {
           case "users":
-            setData({...docSnapData, detailName : docSnapData.displayName}); 
-            break; 
-          case "products":
-            setData({...docSnapData, detailName : docSnapData.title}); 
-            break; 
-          default: 
+            setData({ ...docSnapData, detailName: docSnapData.displayName });
             break;
-        } 
-      }   
+          case "products":
+            setData({ ...docSnapData, detailName: docSnapData.title });
+            break;
+          default:
+            break;
+        }
+      }
     };
-    fetchData();  
-  }, []);   
+    fetchData();
+  }, []);
 
-  const AllKeys = Object.keys(data); 
-  const keys = AllKeys.filter(e => e !== 'timeStamp' && e !== 'img' && e !== 'password' && e !== 'displayName' && e !== 'title' && e !== 'detailName')
+  const AllKeys = Object.keys(data);
+  const keys = AllKeys.filter((e) => e !== "timeStamp" && e !== "img" && e !== "password" && e !== "displayName" && e !== "title" && e !== "detailName");
 
   return (
     <div className="single">
@@ -69,8 +69,7 @@ const Single = ({columns}) => {
                     <span className="itemKey">{key}:</span>
                     <span className="itemValue">{data[key]}</span>
                   </div>
-                ))} 
-
+                ))}
               </div>
             </div>
           </div>

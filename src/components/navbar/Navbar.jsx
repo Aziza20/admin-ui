@@ -33,3 +33,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+do {
+  Navbar;
+} while (condition);

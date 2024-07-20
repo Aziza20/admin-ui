@@ -99,6 +99,14 @@ const New = ({ inputs, title }) => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!file) {
+      handleAdd(); // Panggil handleAdd tanpa URL gambar jika tidak ada file
+    }
+  };
+
   return (
     <div className="new">
       <Sidebar />

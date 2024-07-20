@@ -2,6 +2,42 @@ import "./mydatatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 // eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
+
+const Mydatatable = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, "categories"), // Ganti 'categories' dengan nama koleksi Anda
+      (snapShot) => {
+        let list = [];
+        snapShot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setData(list);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, "categories", id)); // Ganti 'categories' dengan nama koleksi Anda
+      setData(data.filter((item) => item.id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -21,9 +57,11 @@ const rows = [
   { id: 10, name: "Americano"},
 ];
 
+// eslint-disable-next-line no-unused-vars
 const actionColumn = [
 ];
 
+// eslint-disable-next-line no-unused-vars
 const Mydatatable = () => {
   return (
     <div className="mydatatable">
@@ -33,7 +71,26 @@ const Mydatatable = () => {
 
       <DataGrid
         rows={rows}
-        columns={columns.concat(actionColumn)}
+        columns={columns.concat([
+            {
+              field: "action",
+              headerName: "Action",
+              width: 200,
+              renderCell: (params) => {
+                return (
+                  <div className="cellAction">
+                    <span
+                      className="deleteButton"
+                      data-testid="deleteButton"
+                      onClick={() => handleDelete(params.row.id)}
+                    >
+                      Delete
+                    </span>
+                  </div>
+                );
+              },
+            },
+          ])}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },
@@ -45,5 +102,5 @@ const Mydatatable = () => {
     </div>
   );
 };
-
+}
 export default Mydatatable;

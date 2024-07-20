@@ -1,9 +1,12 @@
 import "./mylist.scss";
+
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Widget from "../../components/widget/Widget";
 import Mydatatable from "../../components/mydatatable/Mydatatable";
-import React from "react";
+
 
 const Mylist = () => {
   return (
@@ -11,10 +14,13 @@ const Mylist = () => {
       <Sidebar />
       <div className="listContainer">
         <Navbar />
+        
         <div className="widgets">
           <Widget type="user"/>
-          <Widget type="order"/>
+          <Widget type="product"/>
+          <Widget type="category"/>
         </div>
+
         <Mydatatable/>
       </div>
     </div>
