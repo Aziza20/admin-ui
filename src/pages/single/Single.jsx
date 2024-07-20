@@ -38,6 +38,7 @@ const Single = ({ columns }) => {
       }
     };
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const AllKeys = Object.keys(data);

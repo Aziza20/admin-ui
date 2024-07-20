@@ -157,6 +157,7 @@ const Widget = ({ type }) => {
       } 
     };
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

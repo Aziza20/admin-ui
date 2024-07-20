@@ -100,4 +100,5 @@ const Sidebar = () => {
 export default Sidebar;
 do {
   Sidebar;
+// eslint-disable-next-line no-undef
 } while (condition);
